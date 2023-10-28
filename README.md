@@ -1,7 +1,7 @@
 # java-loop-application
 2021動態網頁課程專題-java的迴圈應用教學
 ---
-迴圈專題(1).zip:上述所有檔案的壓縮檔，解壓縮後點選main.html(主畫面)<br><br>
+迴圈專題(1).zip:上述所有檔案的壓縮檔，解壓縮後點選main.html(主畫面)<br>
 
 main.html:主畫面<br>
 image.html:主畫面中的輪播畫面<br><br>
