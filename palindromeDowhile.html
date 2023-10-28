@@ -1,0 +1,884 @@
+<html>
+<script>
+
+var words = ['String s = ', 'boolean isPal = true', 'int i = 0', 's.charAt(i) != s.charAt(s.length()-1-i)', 'isPal = false', 'break', 'i++', 'i < s.length() / 2', 'isPal', '輸出是迴文', '輸出非迴文'];
+var codeid=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11'];
+var javaid=['c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11'];
+var ctx;
+var num1, num2, temp;
+var s;
+var current = -1;
+var pre = -1;
+var p = true;
+var index = 0;
+
+function initFlowChart()
+{
+    var canvas = document.getElementById("cs1");
+    ctx = canvas.getContext("2d");
+    ctx.scale(2,2);
+    ctx.font = "8px Arial";
+    ctx.textAlign = 'center';
+
+    ctx.beginPath();
+    ctx.moveTo(125, 0);
+    ctx.lineTo(125, 10);
+    ctx.stroke();
+    ctx.closePath();
+    for(var i = 0; i < 11; i++)
+	{
+		if(i < 3)
+		{
+			ctx.strokeRect(65, 10 + i * 25, 120, 15);
+			ctx.fillText(words[i], 125, 20 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(125, 25 + i * 25);
+			ctx.lineTo(125, 35 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+        else if(i == 3)
+		{
+			ctx.beginPath();
+			ctx.moveTo(45, 35 + (i-1) * 25 + 20);
+			ctx.lineTo(125, 35 + (i-1) * 25);//上面那條加10
+			ctx.lineTo(205, 35 + (i-1) * 25 + 20);
+			ctx.lineTo(125, 35 + (i-1) * 25 + 40);//上下差25
+			
+			//ctx.moveTo(80, 65);
+			//ctx.lineTo(130, 77.5);
+			//ctx.lineTo(80, 90);
+			//ctx.lineTo(30, 77.5);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillText(words[i], 125, 32.5 + i * 25);
+        }
+		else if(i < 6)
+		{
+			ctx.beginPath();
+			ctx.moveTo(43.7, 5 + i * 25 + (i-4) * 10);
+			ctx.lineTo(43.7, 25 + i * 25 + (i-4) * 10);
+			ctx.stroke();
+			ctx.closePath();
+			
+			ctx.strokeRect(18.7, 25 + i * 25 + (i-4) * 10, 50, 15);
+			ctx.fillText(words[i], 43.5, 35 + i * 25 + (i-4) * 10);
+			
+			/*i++;
+			ctx.beginPath();
+			ctx.moveTo(43.7, 15 + i * 25);
+			ctx.lineTo(43.7, 35 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+			ctx.strokeRect(40, 45 + i * 25, 50, 15);
+			ctx.fillText(words[i], 65, 55 + i * 25);*/
+        }
+		else if(i == 6)
+		{	
+			ctx.beginPath();
+			ctx.moveTo(125, 25 + (i-2) * 25);
+			ctx.lineTo(125, 50 + (i-2) * 25);
+			ctx.stroke();
+			ctx.closePath();
+			
+			ctx.strokeRect(115, 25 + (i-1) * 25, 20, 15);
+			ctx.fillText(words[i], 125, 35 + (i-1) * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(125, 15 + i * 25);
+			ctx.lineTo(125, 40 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+		else if(i == 7)
+		{
+			
+			ctx.beginPath();
+			ctx.moveTo(80, 40 + (i-1) * 25 + 12.5);
+			ctx.lineTo(125, 40 + (i-1) * 25);//上面那條加10
+			ctx.lineTo(170, 40 + (i-1) * 25 + 12.5);
+			ctx.lineTo(125, 65 + (i-1) * 25);//上下差25
+			
+			//ctx.moveTo(80, 65);
+			//ctx.lineTo(130, 77.5);
+			//ctx.lineTo(80, 90);
+			//ctx.lineTo(30, 77.5);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillText(words[i], 125, 30 + i * 25);
+			
+        }
+		else if(i == 8)
+		{
+			ctx.beginPath();
+			ctx.moveTo(125, 15 + i * 25);
+			ctx.lineTo(125, 45 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+			
+			
+			ctx.beginPath();
+			ctx.moveTo(105, 52.5 + i * 25);
+			ctx.lineTo(125, 45 + i * 25);//上面那條加10
+			ctx.lineTo(145, 52.5 + i * 25);
+			ctx.lineTo(125, 60 + i * 25);//上下差25
+			
+			
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillText(words[i], 125, 55 + i * 25);
+			
+			//ctx.strokeRect(115, 45 + i * 25, 50, 15);
+			//ctx.fillText(words[i], 125, 55 + i * 25);
+			
+			
+        }
+		else
+		{
+			ctx.beginPath();
+			ctx.moveTo(105, 27.5 + i * 25);
+			ctx.lineTo(85, 27.5 + i * 25);
+			ctx.lineTo(85, 37.5 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+			
+			
+			ctx.strokeRect(60, 37.5 + i * 25, 50, 15);
+			ctx.fillText(words[i], 85, 47.5 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(145, 27.5 + i * 25);
+			ctx.lineTo(165, 27.5 + i * 25);
+			ctx.lineTo(165, 37.5 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+			
+			i++;
+			ctx.strokeRect(140, 37.5 + (i-1) * 25, 50, 15);
+			ctx.fillText(words[i], 165, 47.5 + (i-1) * 25);
+			
+        }
+    }
+	ctx.beginPath();
+    ctx.moveTo(43.7, 175);
+    ctx.lineTo(43.7, 230);
+    ctx.lineTo(125.5, 230);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(120, 227.5);
+    ctx.lineTo(124, 230);
+    ctx.lineTo(120, 232.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(125, 80);
+    ctx.lineTo(212, 80);
+    ctx.lineTo(212, 203.5);
+    ctx.lineTo(170, 202.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(130, 77.5);
+    ctx.lineTo(126, 80);
+    ctx.lineTo(130, 82.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	
+	ctx.fillText("false", 140, 135);
+	ctx.fillText("true", 55, 120);
+	
+	ctx.fillText("false", 110, 222.5);
+	ctx.fillText("true", 175, 215);
+	
+	ctx.fillText("false", 155, 245);
+	ctx.fillText("true", 90, 245);
+}
+function highlight(curr)
+{
+	document.getElementById(codeid[curr]).setAttribute("class","table-warning");
+	document.getElementById(javaid[curr]).setAttribute("class","table-warning");
+	document.getElementById(codeid[curr]).style.color="#dd0000";
+	//document.getElementById(codeid[curr]).style.background="yellow"; 
+	document.getElementById(javaid[curr]).style.color="#dd0000";
+	//document.getElementById(javaid[curr]).style.background="yellow";    
+	drawColor(curr);
+}
+function drawColor(n)
+{
+	ctx.fillStyle = '#ffeeaa';
+	
+	if(n < 3)
+	{
+			//ctx.strokeRect(65, 10 + i * 25, 120, 15);
+			//ctx.fillText(words[i], 125, 20 + i * 25);
+			
+		ctx.fillRect(66, 11 + n * 25, 118, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 125, 20 + n * 25);
+	}
+	else if(n == 3)
+	{
+		
+		ctx.beginPath();
+		ctx.moveTo(47, 35 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 36 + (n-1) * 25);
+        ctx.lineTo(203, 35 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 74 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 125, 32.5 + n * 25);	
+		
+	}
+	else if(n < 6)
+	{
+		
+		
+		ctx.fillRect(19.7, 26 + n * 25 + (n-4) * 10, 48, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 43.5, 35 + n * 25 + (n-4) * 10);
+		/*ctx.beginPath();
+		ctx.moveTo(47, 45 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 46 + (n-1) * 25);
+        ctx.lineTo(203, 45 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 84 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 125, 42.5 + n * 25);	*/
+		
+	}
+	else if(n == 6)
+	{	
+		ctx.fillRect(116, 26 + (n-1) * 25, 18, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 125, 35 + (n-1) * 25);
+		
+	}
+	else if(n == 7)
+	{
+		
+		ctx.beginPath();
+		ctx.moveTo(83, 40 + (n-1) * 25 + 12.5);
+        ctx.lineTo(125, 41 + (n-1) * 25);
+        ctx.lineTo(168, 40 + (n-1) * 25 + 12.5);
+        ctx.lineTo(125, 64 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 125, 30 + n * 25);		
+    }
+	else if(n == 8)
+	{
+		ctx.beginPath();
+		ctx.moveTo(107, 52.5 + n * 25);
+        ctx.lineTo(125, 46 + n * 25);
+        ctx.lineTo(143, 52.5 + n * 25);
+        ctx.lineTo(125, 59 + n * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 125, 55 + n * 25);	
+		
+    }
+	else if(n == 9)
+	{
+		ctx.fillRect(61, 38.5 + n * 25, 48, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 85, 47.5 + n * 25);
+	}
+	else
+	{
+			//ctx.strokeRect(30, 20 + i * 25, 100, 15);
+			//ctx.fillText(words[i], 80, 30 + i * 25);
+		ctx.fillRect(141, 38.5 + (n-1) * 25, 48, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 165, 47.5 + (n-1) * 25);
+		
+	}
+}
+
+function redraw(pre)
+{
+	document.getElementById(codeid[pre]).setAttribute("class","");
+	document.getElementById(javaid[pre]).setAttribute("class","");
+	document.getElementById(codeid[pre]).style.color="black";
+	//document.getElementById(codeid[pre]).style.background="white"; 
+	document.getElementById(javaid[pre]).style.color="black";
+	//document.getElementById(javaid[pre]).style.background="white";  
+	clearColor(pre);
+}
+function clearColor(n)
+{
+	if(n < 3)
+	{
+		
+		ctx.fillStyle = 'black';
+		ctx.clearRect(66, 11 + n * 25, 118, 13);
+        ctx.fillText(words[n], 125, 20 + n * 25);
+	}
+	else if(n == 3)
+	{
+		ctx.fillStyle = 'white';
+		ctx.beginPath();
+		ctx.moveTo(47, 35 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 36 + (n-1) * 25);
+        ctx.lineTo(203, 35 + (n-1) * 25 + 20);
+        ctx.lineTo(125, 74 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = 'black';
+		//ctx.fillText(words[n], 75, 30+n*25);
+		ctx.fillText(words[n], 125, 32.5 + n * 25);
+		
+	}
+	else if(n < 6)
+	{
+		ctx.fillStyle = 'black';
+		ctx.clearRect(19.7, 26 + n * 25 + (n-4) * 10, 48, 13);
+        ctx.fillText(words[n], 43.5, 35 + n * 25 + (n-4) * 10);
+		
+		
+		
+	}
+	else if(n == 6)
+	{
+		
+		ctx.fillStyle = 'black';
+		ctx.clearRect(116, 26 + (n-1) * 25, 18, 13);
+        ctx.fillText(words[n], 125, 35 + (n-1) * 25);
+		
+	}
+	else if(n == 7)
+	{
+		
+		ctx.fillStyle = 'white';
+		ctx.beginPath();
+		ctx.moveTo(83, 40 + (n-1) * 25 + 12.5);
+        ctx.lineTo(125, 41 + (n-1) * 25);
+        ctx.lineTo(168, 40 + (n-1) * 25 + 12.5);
+        ctx.lineTo(125, 64 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = 'black';
+		ctx.fillText(words[n], 125, 30 + n * 25);		
+    }
+	else if(n == 8)
+	{
+		ctx.fillStyle = 'white';
+		ctx.beginPath();
+		ctx.moveTo(107, 52.5 + n * 25);
+        ctx.lineTo(125, 46 + n * 25);
+        ctx.lineTo(143, 52.5 + n * 25);
+        ctx.lineTo(125, 59 + n * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = 'black';
+		ctx.fillText(words[n], 125, 55 + n * 25);	
+			
+    }
+	else if(n == 9)
+	{
+		
+		ctx.fillStyle = 'black';
+		ctx.clearRect(61, 38.5 + n * 25, 48, 13);
+        ctx.fillText(words[n], 85, 47.5 + n * 25);
+	}
+	else
+	{
+		ctx.fillStyle = 'black';
+		ctx.clearRect(141, 38.5 + (n-1) * 25, 48, 13);
+        ctx.fillText(words[n], 165, 47.5 + (n-1) * 25);
+		
+	}
+	//ctx.fillText(words[n], 75, 30 + n * 25);
+}
+
+
+function printRed(id, num)
+{
+	document.getElementById(id).innerHTML = "<font color=red>" + num + "</font>";
+}
+function printBlack(id, num)
+{
+	document.getElementById(id).innerHTML = num;
+}
+function printAns(id, ss)
+{
+	document.getElementById(id).innerHTML = ss;
+}
+
+
+function getInput()
+{
+	s = document.getElementById('str').value;
+	//num1 = Math.round(document.getElementById('intNum1').value);
+	//num2 = Math.round(document.getElementById('intNum2').value);
+}
+function step_show()
+{
+	//document.getElementById("B_auto").disabled = false;
+	//document.getElementById("B_next").disabled = true;
+	
+	switch(current)
+	{
+		/*case -1:
+			getInput();
+			current++;
+			break;*/
+		case -1:
+			getInput();
+			if(s == "")
+			{
+				alert("請輸入s的值");
+				break;
+			}
+			current++;
+			
+			words[0] = "String s = " + s;
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 1:
+			printRed("ptintP", p);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 2:
+			printBlack("ptintP", p);
+			printRed("ptintI", index);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 3:
+			printBlack("ptintI", index);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(s.substr(index,1) != s.substr(s.length - 1 - index,1))
+			{
+				current++;
+			}
+			else
+			{
+				current = 6;
+			}
+			/*if(index < Math.floor(s.length / 2))
+			{
+				current++;
+			}
+			else
+			{
+				current = 8;
+			}*/
+			break;
+		case 4:
+			p = false;
+			printRed("ptintP", p);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 5:
+			printBlack("ptintP", p);
+			//num2 = temp;
+			//printBlack("ptintNum1", num1);
+			//printRed("ptintNum2", num2);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current = 8;
+			break;
+		case 6:
+			index++;
+			printRed("ptintI", index);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+			/*
+			temp = num1 % num2;
+			printBlack("ptintNum2", num2);
+			printRed("ptintTemp", temp);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;*/
+		case 7:
+			printBlack("ptintI", index);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(index < Math.floor(s.length / 2))
+			{
+				current = 3;
+			}
+			else
+			{
+				current++;
+			}
+			break;
+		case 8:
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(p)
+			{
+				current++;
+			}
+			else
+			{
+				current = 10;
+			}
+			break;
+		case 9:
+			printBlack("ptintP", p);
+			printAns("SCprint", "是迴文");
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current = 11;
+			break;
+		case 10:
+			printBlack("ptintP", p);
+			printAns("SCprint", "非迴文");
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 11:
+			redraw(pre);
+			pre = -1;
+			clearall();
+			break;
+		
+	}
+   
+}
+
+
+
+var rid=['p1','p2','p3'];
+var speed = 0.5;
+function getspeed()
+{
+	for (var i = 0; i <= 2; i++)
+	{
+		if (document.getElementById(rid[i]).checked) 
+		{
+			speed = parseFloat(document.getElementById(rid[i]).value);//0.5 or 1 or 2
+		}
+	}
+}
+var timer;
+//var counter = 0;
+function auto_show()
+{
+	
+	//document.getElementById("B_next").disabled = true;
+	getInput();
+	
+	if(s == "")
+	{
+		alert("請輸入 s 的值");
+	}
+	else
+	{
+		document.getElementById("B_auto").disabled = true;
+		timer = window.setInterval("controlAutoShow();", speed * 1000);
+	}
+    //sec = codeid.length; 
+	//ann = -1;
+    //clearall() ;
+    
+}
+function controlAutoShow()
+{
+	//counter++;
+	if(current < 11)
+	{
+		step_show();//第7個不會重畫
+	
+	}
+	else
+	{
+		step_show();
+		resettimer();
+	}
+    
+}
+function resettimer()
+{
+    window.clearInterval(timer); 
+	document.getElementById("B_auto").disabled = false;
+    //counter = 0;
+}
+function clearall() 
+{
+	
+	resettimer();
+    current = -1;
+	index = 0;
+	p = true;
+    redraw(pre);
+    //printBlack("ptintNum1", num1);
+	//printBlack("ptintNum2", num2);
+	//printBlack("ptintTemp", temp);
+    
+	document.getElementById("B_auto").disabled = false;
+	document.getElementById("B_next").disabled = false;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	<script src="js/popper.min.js"></script>
+  
+	<style>
+	.go-top
+	{
+		position: fixed;	    /* 設置fixed固定定位 */
+		bottom: 20px;			/* 距離下邊框20px */
+		left: 40px;		
+	}
+	</style>
+	
+	
+	<title>判斷迴文do while</title> 
+</head>
+
+
+
+
+
+
+
+
+<body onload='initFlowChart()'>
+
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="main.html" style="color:white">迴圈應用</a>
+	
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="main.html" style="color:white">首頁</a>
+		  </li>		  
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="test.html" style="color:white">解題評量</a>
+		  </li>	
+		</ul>
+	</div>
+</nav>
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>判斷迴文</h1>
+        <h5 class="text-muted">迴圈：do while</h5>
+		
+    </div>
+	
+	
+</header>  
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-11">
+		<article>
+		
+		<table border=0 class="table table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th>說明</th>
+					<th>程式碼</th> 
+					<th>流程圖</th>
+				</tr>
+			</thead>		
+			<tbody>
+				<tr>
+					<td id=s1>設定String s 的值</td>
+					<td id=c1>String s = <input type=text id='str' > ;</td>
+					<td rowspan=11><canvas id='cs1' width='450' height='560'></canvas></td>
+				</tr>
+				<tr>
+					<td id=s2>設定boolean isPal 為 true</td>
+					<td id=c2>boolean isPal = true;</td>
+				</tr>
+				<tr>
+					<td id=s3>設定int i 為0</td>
+					<td id=c3>int i = 0;</td>
+				</tr>
+				<tr>
+					<td id=s4>判斷 s 第 i 個字是否不等於<br>s的長度 -1- i 個字</td>
+					<td id=c4>do{<br>&nbsp;&nbsp;&nbsp;&nbsp;
+							  if(s.charAt(i) != s.charAt(s.length() - 1 - i)){</td>
+				</tr>
+				<tr>
+					<td id=s5>isPal 為 false</td>
+					<td id=c5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPal = false;</td>
+				</tr>
+				<tr>
+					<td id=s6>跳出此迴圈</td>
+					<td id=c6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; }</td>
+				</tr>
+				<tr>
+					<td id=s7>i 的值加 1</td>
+					<td id=c7>&nbsp;&nbsp;&nbsp;&nbsp;i++;</td>
+				</tr>
+				<tr>
+					<td id=s8>判斷 i 是否小於 s 的長度除2</td>
+					<td id=c8>}while(i &lt; s.length() / 2);</td>
+				</tr>
+				<tr>
+					<td id=s9>判斷 isPal </td>
+					<td id=c9>if(isPal){</td>
+				</tr>
+				<tr>
+					<td id=s10>輸出 是迴文</td>
+					<td id=c10>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("是迴文"); } </td>
+				</tr>
+				<tr>
+					<td id=s11>輸出 非迴文</td>
+					<td id=c11>else {<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("非迴文"); }</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<div class="radio-inline go-top" style="background:#fafafa;">
+		<font size=4>
+		速度:
+			<label>
+				<input type="radio" name="rate" id="p1" value="0.5" onclick="getspeed();" checked>快 (0.5秒)
+			</label>
+
+			<label>
+				<input type="radio" name="rate" id="p2" value="1" onclick="getspeed();">中 (1秒)
+			</label>
+			
+			<label>
+				<input type="radio" name="rate" id="p3" value="1.5" onclick="getspeed();">慢 (1.5秒)     
+			</label>
+		</font>
+		<button type="button" class="btn btn-outline-secondary" id='B_auto' onclick="auto_show();"><b>自動</b></button>
+		<button type="button" class="btn btn-outline-secondary" id='B_next' onclick="step_show();resettimer();"><b>下一步</b></button>
+		<button type="button" class="btn btn-outline-secondary" onclick="clearall();"><b>重新</b></button>
+		</div>
+		</article>
+		</div>
+		
+		<div class="col-md-1">
+		<aside>
+			<table class="table table-condensed table-hover">
+			<thead class="thead-light">
+				<tr class="">
+					<th>變數</th>
+					<th>值</th> 
+							
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>isPal</td>
+					<td id=ptintP>true</td>
+				</tr>
+				<tr>
+					<td>i</td>
+					<td id=ptintI>0</td>
+				</tr>
+			</tbody>
+			</table>
+			
+			
+			<table class="table table-condensed rounded" style="background:#6c757d;color:white;white-space:nowrap;">
+			<thead class="">
+				<tr class="">
+					<th colspan=2>輸出畫面</th> <th></th> 
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id=SCprint></td>
+				</tr>
+				
+			</tbody>
+			</table>
+			
+			
+		</aside>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+
+
+</body>
+</html>

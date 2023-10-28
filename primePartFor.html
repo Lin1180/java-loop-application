@@ -1,0 +1,746 @@
+<html>
+<script>
+
+var words = ['int num = ', 'int i = 2', 'i <= num', 'num != i', 'num % i == 0', ' 輸出 num 的值 + " * "', 'num /= i', 'break', 'i++', '輸出 num 的值'];
+var codeid=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+var javaid=['c1','c2','c3','c4','c5','c6','c7','c8','c9','c10'];
+var ctx;
+var num1, num2, temp;
+var num;
+var current = -1;
+var pre = -1;
+var p = true;
+var inti = 2;
+
+function initFlowChart()
+{
+    var canvas = document.getElementById("cs1");
+    ctx = canvas.getContext("2d");
+    ctx.scale(2,2);
+    ctx.font = "8px Arial";
+    ctx.textAlign = 'center';
+
+    ctx.beginPath();
+    ctx.moveTo(120, 0);
+    ctx.lineTo(120, 10);
+    ctx.stroke();
+    ctx.closePath();
+    for(var i = 0; i < 10; i++)
+	{
+		if(i < 2)
+		{
+			ctx.strokeRect(70, 10 + i * 25, 100, 15);
+			ctx.fillText(words[i], 120, 20 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(120, 25 + i * 25);
+			ctx.lineTo(120, 35 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+        else if(i < 5)
+		{
+			ctx.beginPath();
+			ctx.moveTo(120, i * 25 + (i-2) * 10);
+			ctx.lineTo(120, i * 25 + (i-2) * 10 + 10);
+			ctx.stroke();
+			ctx.closePath();
+			
+			ctx.beginPath();
+			ctx.moveTo(82.5, i * 25 + 22.5 + (i-2) * 10);
+			ctx.lineTo(120, i * 25 + 10 + (i-2) * 10);
+			ctx.lineTo(157.5, i * 25 + 22.5 + (i-2) * 10);
+			ctx.lineTo(120, 35 + i * 25 + (i-2) * 10);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillText(words[i], 120, 25 + i * 25 + (i-2) * 10);
+			
+			/*ctx.beginPath();
+			ctx.moveTo(120, 35 + i * 25 + (i-2) * 10);
+			ctx.lineTo(120, 45 + i * 25 + (i-2) * 10);
+			ctx.stroke();
+			ctx.closePath();*/
+			
+        }
+		else if(i < 7)
+		{
+			ctx.beginPath();
+			ctx.moveTo(158.5, 17.5 + i * 25 + (i-5) * 7.5);
+			ctx.lineTo(158.5, 35 + i * 25 + (i-5) * 7.5);
+			ctx.stroke();
+			ctx.closePath();
+			
+			ctx.strokeRect(118.5, 35 + i * 25 + (i-5) * 7.5, 80, 15);
+			ctx.fillText(words[i], 158.5, 45 + i * 25 + (i-5) * 7);
+			
+        }
+		else if(i == 7)
+		{	
+			ctx.beginPath();
+			ctx.moveTo(81.5, 17.5 + (i-2) * 25);
+			ctx.lineTo(81.5, 35 + (i-2) * 25);
+			ctx.stroke();
+			ctx.closePath();
+			
+			ctx.strokeRect(61.5, 35 + (i-2) * 25, 40, 15);
+			ctx.fillText(words[i], 81.5, 45 + (i-2) * 25);
+        }
+		else
+		{
+			ctx.strokeRect(90, 30 + i * 25 + (i-8) * 10, 60, 15);
+			ctx.fillText(words[i], 120, 40 + i * 25 + (i-8) * 10);
+			
+        }
+		
+    }
+	/*ctx.beginPath();
+    ctx.moveTo(70, 100);//70
+    ctx.lineTo(20, 100);
+    ctx.lineTo(20, 215);
+    ctx.lineTo(120.5, 215);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(117, 225);
+    ctx.lineTo(120, 229.5);
+    ctx.lineTo(123, 225);
+    ctx.stroke();
+    ctx.closePath();*/
+	
+	ctx.beginPath();
+    ctx.moveTo(120, 90);
+    ctx.lineTo(210, 90);
+    ctx.lineTo(210, 215);
+    ctx.lineTo(158.5, 215);
+	ctx.lineTo(158.5, 207.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(125, 87.5);
+    ctx.lineTo(121, 90);
+    ctx.lineTo(125, 92.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(82.5, 107.5);
+    ctx.lineTo(40, 107.5);
+	ctx.lineTo(40, 220);
+	ctx.lineTo(120, 220);
+	ctx.lineTo(120, 230);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(82.5, 72.5);
+    ctx.lineTo(30, 72.5);
+	ctx.lineTo(30, 257.5);
+	ctx.lineTo(120, 257.5);
+	ctx.lineTo(120, 265);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(120, 55);
+    ctx.lineTo(220, 55);
+	ctx.lineTo(220, 252.5);
+	ctx.lineTo(120, 252.5);
+	ctx.lineTo(120, 245);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(125, 52.5);
+    ctx.lineTo(121, 55);
+	ctx.lineTo(125, 57.5);
+    ctx.stroke();
+    ctx.closePath();
+	//break
+	ctx.beginPath();
+    ctx.moveTo(61, 167.5);
+    ctx.lineTo(40, 167.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(45, 165);
+    ctx.lineTo(41, 167.5);
+	ctx.lineTo(45, 170);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.fillText("false", 70, 82.5);
+	ctx.fillText("true", 110, 92.5);
+	
+	ctx.fillText("false", 70, 117.5);
+	ctx.fillText("true", 140, 127.5);
+	
+	ctx.fillText("false", 70, 150);
+	ctx.fillText("true", 170, 150);
+	
+	
+	
+}
+function highlight(curr)
+{
+	document.getElementById(codeid[curr]).setAttribute("class","table-warning");
+	document.getElementById(javaid[curr]).setAttribute("class","table-warning");
+	document.getElementById(codeid[curr]).style.color="#dd0000";
+	//document.getElementById(codeid[curr]).style.background="yellow"; 
+	document.getElementById(javaid[curr]).style.color="#dd0000";
+	//document.getElementById(javaid[curr]).style.background="yellow";    
+	drawColor(curr);
+}
+function drawColor(n)
+{
+	ctx.fillStyle = '#ffeeaa';
+	
+	if(n < 2)
+	{
+		
+		ctx.fillRect(71, 11 + n * 25, 98, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 120, 20 + n * 25);
+	}
+	else if(n < 5)
+	{	
+		
+		ctx.beginPath();
+		ctx.moveTo(84.5, n * 25 + 22.5 + (n-2) * 10);
+        ctx.lineTo(120, n * 25 + 11 + (n-2) * 10);
+        ctx.lineTo(155.5, n * 25 + 22.5 + (n-2) * 10);
+        ctx.lineTo(120, 34 + n * 25 + (n-2) * 10);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 120, 25 + n * 25 + (n-2) * 10);
+		
+	}
+	else if(n < 7)
+	{
+		
+		ctx.fillRect(119.5, 36 + n * 25 + (n-5) * 7.5, 78, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 158.5, 45 + n * 25 + (n-5) * 7);
+		
+	}
+	else if(n == 7)
+	{	
+		
+		ctx.fillRect(62.5, 36 + (n-2) * 25, 38, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 81.5, 45 + (n-2) * 25);
+		
+	}
+	else
+	{
+			
+		ctx.fillRect(91, 31 + n * 25 + (n-8) * 10, 58, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 120, 40 + n * 25 + (n-8) * 10);
+		
+	}
+}
+
+function redraw(pre)
+{
+	document.getElementById(codeid[pre]).setAttribute("class","");
+	document.getElementById(javaid[pre]).setAttribute("class","");
+	document.getElementById(codeid[pre]).style.color="black";
+	//document.getElementById(codeid[pre]).style.background="white"; 
+	document.getElementById(javaid[pre]).style.color="black";
+	//document.getElementById(javaid[pre]).style.background="white";  
+	clearColor(pre);
+}
+function clearColor(n)
+{
+	if(n < 2)
+	{
+	
+		ctx.fillStyle = 'black';
+		ctx.clearRect(71, 11 + n * 25, 98, 13);
+        ctx.fillText(words[n], 120, 20 + n * 25);
+	}
+	else if(n < 5)
+	{	
+		
+		ctx.fillStyle = 'white';
+		ctx.beginPath();
+		ctx.moveTo(84.5, n * 25 + 22.5 + (n-2) * 10);
+		ctx.lineTo(120, n * 25 + 11 + (n-2) * 10);
+		ctx.lineTo(155.5, n * 25 + 22.5 + (n-2) * 10);
+		ctx.lineTo(120, 34 + n * 25 + (n-2) * 10);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = 'black';
+		//ctx.fillText(words[n], 75, 30+n*25);
+		ctx.fillText(words[n], 120, 25 + n * 25 + (n-2) * 10);
+		
+	}
+	else if(n < 7)
+	{
+		ctx.fillStyle = 'black';
+		ctx.clearRect(119.5, 36 + n * 25 + (n-5) * 7.5, 78, 13);
+        ctx.fillText(words[n], 158.5, 45 + n * 25 + (n-5) * 7);
+		
+	}
+	else if(n == 7)
+	{
+		
+		
+		ctx.fillStyle = 'black';	
+		ctx.clearRect(62.5, 36 + (n-2) * 25, 38, 13);
+        ctx.fillText(words[n], 81.5, 45 + (n-2) * 25);
+    }
+	else
+	{
+		ctx.fillStyle = 'black';
+		ctx.clearRect(91, 31 + n * 25 + (n-8) * 10, 58, 13);
+        ctx.fillText(words[n], 120, 40 + n * 25 + (n-8) * 10);
+		
+	}
+	//ctx.fillText(words[n], 75, 30 + n * 25);
+}
+
+
+function printRed(id, num)
+{
+	document.getElementById(id).innerHTML = "<font color=red>" + num + "</font>";
+}
+function printBlack(id, num)
+{
+	document.getElementById(id).innerHTML = num;
+}
+function printAns(id, ss)
+{
+	document.getElementById(id).innerHTML = document.getElementById(id).innerHTML + ss;
+}
+
+function getInput()
+{	
+	num = Math.round(document.getElementById('intNum').value);
+	//s = document.getElementById('str').value;
+	//num1 = Math.round(document.getElementById('intNum1').value);
+	//num2 = Math.round(document.getElementById('intNum2').value);
+}
+function step_show()
+{
+	//document.getElementById("B_auto").disabled = false;
+	//document.getElementById("B_next").disabled = true;
+	
+	switch(current)
+	{
+		/*case -1:
+			getInput();
+			current++;
+			break;*/
+		case -1:
+			getInput();
+			document.getElementById("SCprint").innerHTML = "";
+			if(num < 2)
+			{
+				alert("請輸入大於等於2的值");
+				break;
+			}
+			current++;
+			
+			words[0] = "int num = " + num;
+			printRed("ptintNum", num);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 1:
+			printBlack("ptintNum", num);
+			printRed("ptintI", inti);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 2:
+			printBlack("ptintI", inti);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(inti <= num)
+			{
+				current++;
+			}
+			else
+			{
+				current = 9;
+			}
+			
+			break;
+		case 3:
+			printBlack("ptintNum", num);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(num != inti)
+			{
+				current++;
+				//alert(Math.sqrt(num));
+			}
+			else
+			{
+				current = 8;
+			}
+			break;
+		case 4:
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(num % inti == 0)
+			{
+				current++;
+			}
+			else
+			{
+				current = 7;
+			}
+			
+			break;
+		case 5:
+			//num2 = temp;
+			//printBlack("ptintNum1", num1);
+			//printRed("ptintNum2", num2);
+			printAns("SCprint", (inti + " * "));
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 6:
+			//printBlack("ptintP", p);
+			num /= inti;
+			printRed("ptintNum", num);
+			
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current = 3;
+			break;
+			/*
+			temp = num1 % num2;
+			printBlack("ptintNum2", num2);
+			printRed("ptintTemp", temp);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;*/
+		case 7:
+			//inti++;
+			//printRed("ptintI", inti);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 8:
+			inti++;
+			printRed("ptintI", inti);
+		
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current = 2;
+			break;
+		case 9:
+			//printBlack("ptintP", p);
+			printAns("SCprint", num);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 10:
+			redraw(pre);
+			pre = -1;
+			clearall();
+			break;
+	}
+   
+}
+
+
+
+var rid=['p1','p2','p3'];
+var speed = 0.5;
+function getspeed()
+{
+	for (var i=0;i<=2;i++)
+	{
+		if (document.getElementById(rid[i]).checked) 
+		{
+			speed = parseFloat(document.getElementById(rid[i]).value);//0.5 or 1 or 2
+		}
+	}
+}
+var timer;
+//var counter = 0;
+function auto_show()
+{
+	
+	//document.getElementById("B_next").disabled = true;
+	getInput();
+	
+	if(num < 2)
+	{
+		alert("請輸入大於等於2的值");
+	}
+	else
+	{
+		document.getElementById("B_auto").disabled = true;
+		timer = window.setInterval("controlAutoShow();", speed * 1000);
+	}
+    //sec = codeid.length; 
+	//ann = -1;
+    //clearall() ;
+    
+}
+function controlAutoShow()
+{
+	//counter++;
+	if(current < 10)
+	{
+		step_show();//第7個不會重畫
+	}
+	else
+	{
+		step_show();
+		resettimer();
+	}
+    
+}
+function resettimer()
+{
+    window.clearInterval(timer); 
+	document.getElementById("B_auto").disabled = false;
+    //counter = 0;
+}
+function clearall() 
+{
+	
+	resettimer();
+    current = -1;
+	inti = 2;
+	p = true;
+    redraw(pre);
+    //printBlack("ptintNum1", num1);
+	//printBlack("ptintNum2", num2);
+	//printBlack("ptintTemp", temp);
+    
+	document.getElementById("B_auto").disabled = false;
+	document.getElementById("B_next").disabled = false;
+	
+}
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	<script src="js/popper.min.js"></script>
+  
+	<style>
+	.go-top
+	{
+		position: fixed;	    /* 設置fixed固定定位 */
+		bottom: 20px;			/* 距離下邊框20px */
+		left: 40px;		
+	}
+	</style>
+	
+	
+	<title>質因數分解For</title> 
+</head>
+
+
+
+
+
+
+
+
+<body onload='initFlowChart()'>
+
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="main.html" style="color:white">迴圈應用</a>
+	
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="main.html" style="color:white">首頁</a>
+		  </li>		  
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="test.html" style="color:white">解題評量</a>
+		  </li>	
+		</ul>
+	</div>
+</nav>
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>質因數分解</h1>
+        <h5 class="text-muted">迴圈：for</h5>
+		
+    </div>
+	
+	
+</header>  
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-11">
+		<article>
+		
+		<table border=0 class="table table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th>說明</th>
+					<th>程式碼</th> 
+					<th>流程圖</th>
+				</tr>
+			</thead>		
+			<tbody>
+				<tr>
+					<td id=s1>設定int num 的值</td>
+					<td id=c1>int num = <input type=text id='intNum' > ;</td>
+					<td rowspan=11><canvas id='cs1' width='450' height='565'></canvas></td>
+				</tr>
+				<tr>
+					<td id=s2>設定int i 為 2</td>
+					<td id=c2>int i = 2;</td>
+				</tr>
+				<tr>
+					<td id=s3>判斷 i 是否小於等於 num</td>
+					<td id=c3>for(  ;i &lt;= num;  ) {</td>
+				</tr>
+				<tr>
+					<td id=s4>判斷 num 是否不等於 i</td>
+					<td id=c4>&nbsp;&nbsp;&nbsp;&nbsp;for(  ;num != i; ) {</td>
+				</tr>
+				<tr>
+					<td id=s5>判斷 num 取 i 的餘數是否等於 0</td>
+					<td id=c5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num % i == 0) {</td>
+				</tr>
+				<tr>
+					<td id=s6>輸出 num 的值和 " * "</td>
+					<td id=c6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(i + "*");</td>
+				</tr>
+				<tr>
+					<td id=s7>num 放入 num 除 i 的值</td>
+					<td id=c7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num /= i; }</td>
+				</tr>
+				<tr>
+					<td id=s8>跳出此迴圈</td>
+					<td id=c8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; } }</td>
+				</tr>
+				<tr>
+					<td id=s9>i 的值加 1</td>
+					<td id=c9>&nbsp;&nbsp;&nbsp;&nbsp;i++; }</td>
+				</tr>
+				<tr>
+					<td id=s10>輸出 num 的值</td>
+					<td id=c10>System.out.println(num);</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="radio-inline go-top" style="background:#fafafa;">
+		<font size=4>
+		速度:
+			<label>
+				<input type="radio" name="rate" id="p1" value="0.5" onclick="getspeed();" checked>快 (0.5秒)
+			</label>
+
+			<label>
+				<input type="radio" name="rate" id="p2" value="1" onclick="getspeed();">中 (1秒)
+			</label>
+			
+			<label>
+				<input type="radio" name="rate" id="p3" value="1.5" onclick="getspeed();">慢 (1.5秒)     
+			</label>
+		</font>
+		<button type="button" class="btn btn-outline-secondary" id='B_auto' onclick="auto_show();"><b>自動</b></button>
+		<button type="button" class="btn btn-outline-secondary" id='B_next' onclick="step_show();resettimer();"><b>下一步</b></button>
+		<button type="button" class="btn btn-outline-secondary" onclick="clearall();"><b>重新</b></button>
+		</div>
+		</article>
+		</div>
+		
+		<div class="col-md-1">
+		<aside>
+			<table class="table table-condensed table-hover">
+			<thead class="thead-light">
+				<tr class="">
+					<th>變數</th>
+					<th>值</th> 
+							
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>num</td>
+					<td id=ptintNum>0</td>
+				</tr>
+				<tr>
+					<td>i</td>
+					<td id=ptintI>0</td>
+				</tr>
+			</tbody>
+			</table>
+			
+			<table class="table table-condensed rounded" style="background:#6c757d;color:white;">
+			<thead class="">
+				<tr class="">
+					<th style="white-space:nowrap;">輸出畫面</th> <th></th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan=2 id=SCprint style="word-wrap:break-word;"></td> 
+				</tr>
+				
+			</tbody>
+			</table>
+			
+		</aside>
+		</div>
+	</div>
+</div>
+
+
+<hr>
+
+</body>
+</html>

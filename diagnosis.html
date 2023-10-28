@@ -1,0 +1,362 @@
+<html>
+<script>
+
+
+
+var app = ['app1','app2','app3','app4'];
+var loop = ['loop1','loop2','loop3'];
+
+
+var point = localStorage.getItem("point");
+
+var theme4 = JSON.parse(localStorage.getItem('theme4'));
+var theme3 = JSON.parse(localStorage.getItem('theme3'));
+var wrong = JSON.parse(localStorage.getItem('wrong'));
+var errorQ = JSON.parse(localStorage.getItem('errorQ'));
+
+//document.getElementById('loop1').innerHTML = 1;
+
+
+function showError()
+{
+	for(var i = 0; i < theme4.length; i++)
+	{
+		document.getElementById(app[i]).innerHTML = theme4[i];
+		//alert(theme4[i]);
+	}
+
+	for(var i = 0; i < theme3.length; i++)
+	{
+		//alert(theme3[i]);
+		document.getElementById(loop[i]).innerHTML = theme3[i];
+		//document.getElementById("hideB").innerHTML
+	}
+	
+	document.getElementById('allPoint').innerHTML = point;
+	
+	
+	if(point == 100)
+	{
+		document.getElementById('comment').innerHTML = "恭喜得滿分!!! ٩(^▽^*)۶";
+		
+	}
+	else if(point >= 80)
+	{
+		document.getElementById('comment').innerHTML = "表現不錯!未來可期ヾ( > ▽ < )";
+	
+	}
+	else if(point >= 60)
+	{
+		document.getElementById('comment').innerHTML = "有及格，繼續加油（^ ω ^）";
+	
+	}
+	else
+	{
+		document.getElementById('comment').innerHTML = "未及格，再接再厲 (ง •_•)ง";
+	
+	}
+	
+	var n = 0;
+	for(var i = 0; i < wrong.length; i++)
+	{
+		if(wrong[i] != 0)
+		{
+			var errq = "<font size=3><b>第" + (i+1) + "題：</b></font>";
+			var errq2 = "<font size=3><b>答題" + wrong[i] + "次</b><br></font>";
+			
+			if(n == 0)
+			{	
+				//var errq = "第" + (i+1) + "題"
+				document.getElementById('qu').innerHTML = document.getElementById('qu').innerHTML + errq + errq2 + errorQ[i];
+				
+			}
+			else
+			{
+				document.getElementById('qu').innerHTML = document.getElementById('qu').innerHTML + "<hr>" + errq + errq2 + errorQ[i];
+			}
+			//document.getElementById('qu').innerHTML = document.getElementById('qu').innerHTML + "<hr>" + errorQ[i];
+			n = 1;
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	<script src="js/popper.min.js"></script>
+  
+	<title>學習診斷</title>
+	<style>
+	.go-top
+	{
+		position: fixed;	        /* 設置fixed固定定位 */
+		bottom: 20px;				/* 距離下邊框20px */
+		right: 40px;				/* 距離右邊框20px */
+	}
+	.go-top a
+	{
+		display: block;				/* 將<a>標簽設為塊元素，美化用 */
+		text-decoration: none;		/* 取消超連結底線 */
+		//color: #333;				/* 設置文本顏色 */
+		border: 1px solid #ccc;		/* 設置邊框樣式 */
+		border-radius: 5px;			/* 設置圓角矩形 */
+	}
+	</style>
+</head>
+
+
+
+
+
+
+
+
+<body onload='showError();'>
+
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="main.html" style="color:white">迴圈應用</a>
+	
+	
+	
+</nav>
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>學習診斷</h1>
+        <!--<h5 class="text-muted">迴圈：while</h5>-->
+		
+		<font size=5>
+		<p><span id=userPoint></span></p>
+		</font>
+		
+    </div>
+	
+	
+</header>  
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			
+			<table class="table table-condensed table-hover" >
+				<thead class="thead-light">
+					<tr class="">
+						<th>應用類別</th>
+						<th>錯誤次數</th> 
+								
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+						最大公因數
+						</td>
+						<td>
+						<span id=app1></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						判斷迴文
+						</td>
+						<td>
+						<span id=app2></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						判斷質數
+						</td>
+						<td>
+						<span id=app3></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						質因數分解
+						</td>
+						<td>
+						<span id=app4></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		
+		<div class="col-md-4">
+			<table class="table table-condensed table-hover" >
+				<thead class="thead-light">
+					<tr class="">
+						<th>迴圈類別</th>
+						<th>錯誤次數</th> 
+								
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+						while
+						</td>
+						<td>
+						<span id=loop1></span>
+						
+						</td>
+					</tr>
+					<tr>
+						<td>
+						for
+						</td>
+						<td>
+						<span id=loop2></span>
+						
+						</td>
+					</tr>
+					<tr>
+						<td>
+						do while
+						</td>
+						<td>
+						<span id=loop3></span>
+						
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
+		</div>
+		
+		<div class="col-md-4">
+			<table class="table table-condensed table-hover" >
+				<thead class="thead-light">
+					<tr class="">
+						<th colspan=2>總結</th>
+						
+								
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+						成績
+						</td>
+						<td>
+						<span id=allPoint></span>
+						
+						</td>
+					</tr>
+					<tr>
+						<td>
+						評語
+						</td>
+						<td>
+						<span id=comment></span>
+						
+						</td>
+					</tr>
+					
+					
+				</tbody>
+			</table>
+			
+		</div>
+		
+		<!--<div class="col-md-12">
+			<table class="table table-condensed table-hover" >
+				<thead class="thead-light">
+					<tr class="">
+						<th colspan=2>錯的題目</th>
+						
+								
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						
+						<td>
+						<span id=qu></span>
+						
+						</td>
+					</tr>
+					
+					
+					
+				</tbody>
+			</table>
+			
+		</div>-->
+		
+		<div class="col-md-12">
+			<div id="accordion">
+				<div class="card" style="background:#E6E6F2;">
+					<div class="card-header">
+						<a class="card-link" data-toggle="collapse" href="#collapseOne">
+							<b><font color=black size=3>錯的題目</font></b>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div id="collapseOne" class="collapse show" data-parent="#accordion">
+				<div class="card-body">
+				<span id=qu></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="go-top">
+	<a href="#"><img src="./image/top.png" height=50 width=50 class="rounded-circle"></a>
+</div>
+
+<center><button type="button" class="btn btn-outline-secondary" onclick="window.location='test.html'"><b>再測一次</b></button></center>
+
+<hr>
+
+</body>
+</html>

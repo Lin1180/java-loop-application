@@ -1,0 +1,628 @@
+<html>
+<script>
+
+var words = ['設定int num1 = ','設定int num2 = ', '設定int temp = num1','num1 = num2','num2 = temp','temp = num1 % num2','num1 % num2 != 0', '輸出num2的值'];
+var codeid=['s1','s2','s3','s4','s5','s6','s7','s8'];
+var javaid=['c1','c2','c3','c4','c5','c6','c7','c8'];
+var ctx;
+var num1, num2, temp;
+var current = -1;
+var pre = -1;
+
+
+function initFlowChart()
+{
+    var canvas = document.getElementById("cs1");
+    ctx = canvas.getContext("2d");
+    ctx.scale(2,2);
+    ctx.font = "8px Arial";
+    ctx.textAlign = 'center';
+
+    ctx.beginPath();
+    ctx.moveTo(80, 0);
+    ctx.lineTo(80, 10);
+    ctx.stroke();
+    ctx.closePath();
+    for(var i = 0; i < 8; i++)
+	{
+		if(i < 6)
+		{
+			ctx.strokeRect(30, 10 + i * 25, 100, 15);
+			ctx.fillText(words[i], 80, 20 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(80, 25 + i * 25);
+			ctx.lineTo(80, 35 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+        else if(i == 6)
+		{
+			ctx.beginPath();
+			ctx.moveTo(30, 35 + (i-1) * 25 + 12.5);
+			ctx.lineTo(80, 35 + (i-1) * 25);//上面那條加10
+			ctx.lineTo(130, 35 + (i-1) * 25 + 12.5);
+			ctx.lineTo(80, 60 + (i-1) * 25);//上下差25
+			
+			//ctx.moveTo(80, 65);
+			//ctx.lineTo(130, 77.5);
+			//ctx.lineTo(80, 90);
+			//ctx.lineTo(30, 77.5);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.fillText(words[i], 80, 25 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(80, 35 + i * 25);
+			ctx.lineTo(80, 45 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+		else
+		{
+			ctx.strokeRect(30, 20 + i * 25, 100, 15);
+			ctx.fillText(words[i], 80, 30 + i * 25);
+			
+			ctx.beginPath();
+			ctx.moveTo(80, 35 + i * 25);
+			ctx.lineTo(80, 45 + i * 25);
+			ctx.stroke();
+			ctx.closePath();
+        }
+        //ctx.strokeRect(10, 20+i*25, 130, 15);
+        //ctx.fillText(words[i], 75, 30+i*25);
+    }
+	ctx.beginPath();
+    ctx.moveTo(80, 80);
+    ctx.lineTo(145, 80);
+    ctx.lineTo(145, 172.5);
+    ctx.lineTo(130, 172.5);
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(85, 78);
+    ctx.lineTo(81, 80);
+    ctx.lineTo(85, 82);
+    ctx.stroke();
+    ctx.closePath();
+	
+	/*ctx.beginPath();
+    ctx.moveTo(30, 72.5);
+    ctx.lineTo(10, 72.5);
+    ctx.lineTo(10, 177.5);
+    ctx.lineTo(30, 177.5);//110
+    ctx.stroke();
+    ctx.closePath();
+	
+	ctx.beginPath();
+    ctx.moveTo(25, 175.5);
+    ctx.lineTo(29, 177.5);
+    ctx.lineTo(25, 179.5);
+    ctx.stroke();
+    ctx.closePath();*/
+	
+	
+	ctx.fillText("false", 60, 190);
+	ctx.fillText("true", 135, 180);
+}
+function highlight(curr)
+{
+	document.getElementById(codeid[curr]).setAttribute("class","table-warning");
+	document.getElementById(javaid[curr]).setAttribute("class","table-warning");
+	document.getElementById(codeid[curr]).style.color="#dd0000";
+	//document.getElementById(codeid[curr]).style.background="yellow"; 
+	document.getElementById(javaid[curr]).style.color="#dd0000";
+	//document.getElementById(javaid[curr]).style.background="yellow";    
+	drawColor(curr);
+}
+function drawColor(n)
+{
+	ctx.fillStyle = '#ffeeaa';
+	if(n == 6)
+	{
+		ctx.beginPath();
+		ctx.moveTo(32, 35 + (n-1) * 25 + 12.5);
+        ctx.lineTo(80, 36 + (n-1) * 25);
+        ctx.lineTo(128, 35 + (n-1) * 25 + 12.5);
+        ctx.lineTo(80, 59 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = '#dd0000';
+		ctx.fillText(words[n], 80, 25 + n * 25);
+			//ctx.moveTo(30, 35 + (i-1) * 25 + 12.5);
+			//ctx.lineTo(80, 35 + (i-1) * 25);//上面那條加10
+			//ctx.lineTo(130, 35 + (i-1) * 25 + 12.5);
+			//ctx.lineTo(80, 60 + (i-1) * 25);//上下差25
+	}
+	else if(n < 6)
+	{
+			//ctx.strokeRect(30, 10 + i * 25, 100, 15);
+			//ctx.fillText(words[i], 80, 20 + i * 25);
+		ctx.fillRect(31, 11 + n * 25, 98, 13);
+		ctx.fillStyle = '#dd0000';
+        ctx.fillText(words[n], 80, 20 + n * 25);
+	}
+	else
+	{
+			//ctx.strokeRect(30, 20 + i * 25, 100, 15);
+			//ctx.fillText(words[i], 80, 30 + i * 25);
+		ctx.fillRect(31, 21 + n * 25, 98, 13);
+		ctx.fillStyle = '#ee0000';
+        ctx.fillText(words[n], 80, 30 + n * 25);
+	}
+}
+
+function redraw(pre)
+{
+	document.getElementById(codeid[pre]).setAttribute("class","");
+	document.getElementById(javaid[pre]).setAttribute("class","");
+	document.getElementById(codeid[pre]).style.color="black";
+	//document.getElementById(codeid[pre]).style.background="white"; 
+	document.getElementById(javaid[pre]).style.color="black";
+	//document.getElementById(javaid[pre]).style.background="white";  
+	clearColor(pre);
+}
+function clearColor(n)
+{
+	if(n == 6)
+	{
+		ctx.fillStyle = 'white';
+		ctx.beginPath();
+		ctx.moveTo(32, 35 + (n-1) * 25 + 12.5);
+        ctx.lineTo(80, 36 + (n-1) * 25);
+        ctx.lineTo(128, 35 + (n-1) * 25 + 12.5);
+        ctx.lineTo(80, 59 + (n-1) * 25);
+		ctx.closePath();
+		ctx.fill();
+		ctx.fillStyle = 'black';
+		//ctx.fillText(words[n], 75, 30+n*25);
+		ctx.fillText(words[n], 80, 25 + n * 25);
+		
+	}
+	else if(n < 6)
+	{
+		
+		ctx.fillStyle = 'black';
+		ctx.clearRect(31, 11 + n * 25, 98, 13);
+        ctx.fillText(words[n], 80, 20 + n * 25);
+	}
+	else
+	{
+		
+		ctx.fillStyle = 'black';
+		ctx.clearRect(31, 21 + n * 25, 98, 13);
+        ctx.fillText(words[n], 80, 30 + n * 25);
+	}
+	//ctx.fillText(words[n], 75, 30 + n * 25);
+}
+
+
+function printRed(id, num)
+{
+	document.getElementById(id).innerHTML = "<font color=red>" + num + "</font>";
+}
+function printBlack(id, num)
+{
+	document.getElementById(id).innerHTML = num;
+}
+function printAns(id, num)
+{
+	document.getElementById(id).innerHTML = "GCD = " + num;
+}
+
+
+function getInput()
+{
+	num1 = Math.round(document.getElementById('intNum1').value);
+	num2 = Math.round(document.getElementById('intNum2').value);
+}
+function step_show()
+{
+	//document.getElementById("B_auto").disabled = false;
+	//document.getElementById("B_next").disabled = true;
+	
+	switch(current)
+	{
+		/*case -1:
+			getInput();
+			current++;
+			break;*/
+		case -1:
+			getInput();
+			if(num1 < 1 || num2 < 1)
+			{
+				alert("請在num1和num2輸入大於等於1的的數");
+				break;
+			}
+			current++;
+			
+			words[0] = '設定int num1 = ' + num1;
+			words[1] = '設定int num2 = ' + num2;
+			printRed("ptintNum1", num1);
+			
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 1:
+			printBlack("ptintNum1", num1);
+			printRed("ptintNum2", num2);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 2:
+			temp = num1;
+			printBlack("ptintNum2", num2);
+			printRed("ptintTemp", temp);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 3:
+			num1 = num2;
+			printBlack("ptintTemp", temp);
+			printRed("ptintNum1", num1);
+			//temp = num1 % num2;
+			//printRed("ptintTemp", temp);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 4:
+			num2 = temp;
+			printBlack("ptintNum1", num1);
+			printRed("ptintNum2", num2);
+			//num1 = num2;
+			//printBlack("ptintTemp", temp);
+			//printRed("ptintNum1", num1);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 5:
+			temp = num1 % num2;
+			printBlack("ptintNum2", num2);
+			printRed("ptintTemp", temp);
+			//num2 = temp;
+			//printBlack("ptintNum1", num1);
+			//printRed("ptintNum2", num2);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 6:
+			printBlack("ptintTemp", temp);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			if(num1 % num2 != 0)
+			{	
+				current = 3;
+			}
+			else
+			{
+				current++;
+				//current = 6;
+			}
+			break;
+		case 7:
+			//printBlack("ptintNum2", num2);
+			printAns("SCprint", num2);
+			
+			redraw(pre);
+			highlight(current);
+			pre = current;
+			current++;
+			break;
+		case 8:
+			redraw(pre);
+			pre = -1;
+			current = -1;
+			break;
+		
+	}
+   
+}
+
+
+
+var rid=['p1','p2','p3'];
+var speed = 0.5;
+function getspeed()
+{
+	for (var i=0;i<=2;i++)
+	{
+		if (document.getElementById(rid[i]).checked) 
+		{
+			speed = parseFloat(document.getElementById(rid[i]).value);//0.5 or 1 or 2
+		}
+	}
+}
+var timer;
+//var counter = 0;
+function auto_show()
+{
+	
+	//document.getElementById("B_next").disabled = true;
+	getInput();
+	
+	if(num1 == "" || num2 == "")
+	{
+		alert("請輸入num1和num2的值");
+	}
+	else
+	{
+		document.getElementById("B_auto").disabled = true;
+		timer = window.setInterval("controlAutoShow();", speed * 1000);
+	}
+    //sec = codeid.length; 
+	//ann = -1;
+    //clearall() ;
+    
+}
+function controlAutoShow()
+{
+	//counter++;
+	if(current < 7)
+	{
+		step_show();//第7個不會重畫
+	
+	}
+	else
+	{
+		step_show();
+		resettimer();
+	}
+    
+}
+function resettimer()
+{
+    window.clearInterval(timer); 
+	document.getElementById("B_auto").disabled = false;
+    //counter = 0;
+}
+function clearall() 
+{
+	resettimer();
+    current = -1;
+    redraw(pre);
+    printBlack("ptintNum1", num1);
+	printBlack("ptintNum2", num2);
+	printBlack("ptintTemp", temp);
+    
+	document.getElementById("B_auto").disabled = false;
+	document.getElementById("B_next").disabled = false;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function GCD(num1, num2)
+{
+	while(num1 % num2 != 0) 
+	{
+		var temp = num1 % num2;
+		num1 = num2;
+		num2 = temp;
+	}
+	return num2;
+}
+
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	<script src="js/popper.min.js"></script>
+  
+	<style>
+	.go-top
+	{
+		position: fixed;	        /* 设置fixed固定定位 */
+		bottom: 20px;		/* 距离浏览器窗口下边框20px */
+		left: 40px;		
+	}
+	</style>
+	
+	
+	<title>最大公因數do while</title> 
+</head>
+
+
+
+
+
+
+
+
+<body onload='initFlowChart()'>
+
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="main.html" style="color:white">迴圈應用</a>
+	
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="main.html" style="color:white">首頁</a>
+		  </li>		  
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="test.html" style="color:white">解題評量</a>
+		  </li>	
+		</ul>
+	</div>
+</nav>
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>兩數求最大公因數</h1>
+        <h5 class="text-muted">迴圈：do while</h5>
+		
+    </div>
+	
+	
+</header>  
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-10">
+		<article>
+		
+		<table border=0 class="table table-condensed">
+			<thead class="thead-light">
+				<tr>
+					<th>說明</th>
+					<th>程式碼</th> 
+					<th>流程圖</th>
+				</tr>
+			</thead>		
+			<tbody>
+				<tr>
+					<td id=s1>設定int num1的值</td>
+					<td id=c1>int num1 = <input type=text id='intNum1' size=3> ;</td>
+					<td rowspan=8><canvas id='cs1' width='300' height='500'></canvas></td>
+				</tr>
+				<tr>
+					<td id=s2>設定int num2的值</td>
+					<td id=c2>int num2 = <input type=text id='intNum2' size=3> ;</td>
+				</tr>
+				<tr>
+					<td id=s3>設定int temp為num1</td>
+					<td id=c3>int temp = num1;</td>
+				</tr>
+				<tr>
+					<td id=s4>num1 放入 num2 的值</td>
+					<td id=c4>do{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num1 = num2;</td>
+				</tr>
+				<tr>
+					<td id=s5>num2 放入 temp 的值</td>
+					<td id=c5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num2 = temp;</td>
+				</tr>
+				<tr>
+					<td id=s6>temp 放入 num1 % num2 的值</td>
+					<td id=c6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp = num1 % num2;</td>
+				</tr>
+				<tr>
+					<td id=s7>判斷num1 % num2是否不等於0</td>
+					<td id=c7>}while(num1 % num2 != 0);</td>
+				</tr>
+				<tr>
+					<td id=s8>輸出num2的值</td>
+					<td id=c8>System.out.println("GCD = " + num2);</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<div class="radio-inline go-top" style="background:#fafafa;">
+		<font size=4>
+		速度:
+			<label>
+				<input type="radio" name="rate" id="p1" value="0.5" onclick="getspeed();" checked>快 (0.5秒)
+			</label>
+
+			<label>
+				<input type="radio" name="rate" id="p2" value="1" onclick="getspeed();">中 (1秒)
+			</label>
+			
+			<label>
+				<input type="radio" name="rate" id="p3" value="1.5" onclick="getspeed();">慢 (1.5秒)     
+			</label>
+		</font>
+		<button type="button" class="btn btn-outline-secondary" id='B_auto' onclick="auto_show();"><b>自動</b></button>
+		<button type="button" class="btn btn-outline-secondary" id='B_next' onclick="step_show();resettimer();"><b>下一步</b></button>
+		<button type="button" class="btn btn-outline-secondary" onclick="clearall();"><b>重新</b></button>
+		</div>
+		</article>
+		</div>
+		
+		<div class="col-md-2">
+		<aside>
+			<!--第一個Card-->
+			<!--** class 應增加 border-info mb-3  -->
+			
+			
+			<!--<div class="card border-Light bg-transparent mb-2">
+				<div class="card-header bg-secondary text-white text-center">
+					<h5>關於我們</h5>
+				</div>	
+				<div class="card-body">
+				</div>-->
+				
+					<table class="table table-condensed table-hover">
+					<!--<caption>變數表格</caption>-->
+						<thead class="thead-light">
+						<tr class="">
+							<th>變數</th>
+							<th>值</th> 
+							
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>num1</td>
+							<td id=ptintNum1>0</td>
+						</tr>
+						<tr>
+							<td>num2</td>
+							<td id=ptintNum2>0</td>
+						</tr>
+						<tr>
+							<td>temp</td>
+							<td id=ptintTemp>0</td>
+						</tr>
+					
+						</tbody>
+					</table>
+				<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;" mb-3>
+					<div class="card-header"><font size=3>輸出畫面</font></div>
+					<div class="card-body">
+						<b><span class="card-title" id=SCprint></span></b>
+					</div>
+				</div>
+		</aside>
+		</div>
+	</div>
+</div>
+
+<hr>
+
+
+</body>
+</html>

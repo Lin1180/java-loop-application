@@ -1,0 +1,327 @@
+<html>
+<script>
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	
+	
+  
+
+	<title>迴圈應用</title>
+	<style>
+	/*.navbar
+	{
+		
+		background:#428bca;
+		
+	}*/
+	.go-top
+	{
+		position: fixed;	        /* 设置fixed固定定位 */
+		bottom: 20px;		/* 距离浏览器窗口下边框20px */
+		right: 40px;		/* 距离浏览器窗口右边框20px */
+	}
+	.go-top a
+	{
+		display: block;			/* 将<a>标签设为块元素，用于美化样式 */
+		text-decoration: none;		/* 取消超链接下画线 */
+		//color: #333;			/* 设置文本颜色 */
+		border: 1px solid #ccc;		/* 设置边框样式 */
+		border-radius: 5px;			/* 设置圆角矩形 */
+	}
+	</style>
+</head>
+
+
+
+
+
+<body>
+<!--<DIV style="text-align:center;">-->
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="#" style="color:white">迴圈應用</a>
+	
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		  
+			<li class="nav-item active">
+				<a class="nav-link" href="#">首頁<span class="sr-only">(current)</span></a>
+			</li>		  
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" style="color:white" role="button" data-toggle="dropdown" aria-haspopup="true" 
+			   aria-expanded="false">解題模擬</a>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#GCD">最大公因數</a></li>
+					<li><a class="dropdown-item" href="#palindrome">判斷回文</a></li>
+					<li><a class="dropdown-item" href="#isPrime">判斷質數</a></li>
+					<li><a class="dropdown-item" href="#decomposePrime">質因數分解</a></li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#test" style="color:white">解題評量</a>
+			</li>	
+		</ul>		
+	</div>
+	
+	  
+	
+	
+	
+	
+</nav>
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>JAVA迴圈應用</h1>
+        <small class="text-muted">解題模擬，解題評量，學習診斷</small>
+    </div>
+	
+	
+	
+</header>  
+
+<hr>
+
+<div class="container">	 
+<div class="row">
+	<div class="col-md-1">		
+	</div>
+		<div class="col-md-10">
+			<iframe  width="100%" height="340" src="image.html" frameborder="0"></iframe>
+		</div>
+	</div>
+	<hr>
+</div>
+
+
+<div class="container">	  
+	<div class="row">
+		
+			
+		<div class="col-md-10">
+			<article>
+			
+			
+			<p id=GCD>
+			<h3>最大公因數</h3>
+			<font size=4>
+			最大公因數（HCF）也稱最大公約數（GCD），為數學詞彙，指能夠整除多個整數的最大正整數。而多個整數不能都為零。
+			例如8和12的最大公因數為4，54和24的最大公因數為6。<br><br>
+			<b>質因數分解法</b><br>
+			可以通過質因數分解來計算最大公因數。例如計算gcd(12, 44)，可以先進行質因數分解，12 = 2 * 2 * 3，44 = 2 * 2 * 11，因為其中表達式 2 * 2的「重合」，所以gcd(12, 44) = 4
+			<br><br>
+			<b>輾轉相除法</b><br>
+			相比質因數分解法，輾轉相除法的效率更高。計算gcd(12, 44)時，先將44除以12得到商3、餘數8，然後再將12除以8得到商1、餘數6，再將12除以6得到商2、餘數0，即得到最大公因數6。過程只關心每次除法的餘數是否為0，為0即表示得到答案。
+			<br><br>
+			
+			
+			
+			</font>
+			
+			
+			
+			
+			<div class="dropdown dropright">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background:#5A5AAD;color:white">
+				  最大公因數模擬
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="GCDwhile.html" target="_blank">while</a>
+				  <a class="dropdown-item" href="GCDfor.html" target="_blank">for</a>
+				  <a class="dropdown-item" href="GCDdowhile.html" target="_blank">dowhile</a>
+				</div>
+			</div>
+			</p>
+			<hr>
+			
+			
+			<p id=palindrome>
+			<h3>迴文</h3>
+			<font size=4>
+			迴文，亦稱回文、回環，是正讀反讀都能讀通的句子，亦有將文字排列成圓圈者，是一種修辭方式和文字遊戲。回環運用得當，可以表現兩種事物或現象相互依靠或排斥的關係。
+			<br><br>
+			<b>舉例</b><br>
+			人人為我、我為人人<br>
+			天上龍捲風捲龍上天
+			<br><br>
+			
+			
+			</font>
+			
+			
+			
+			
+			<div class="dropdown dropright">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background:#5A5AAD;color:white">
+				  判斷迴文模擬
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="palindromeWhile.html" target="_blank">while</a>
+				  <a class="dropdown-item" href="palindromeFor.html" target="_blank">for</a>
+				  <a class="dropdown-item" href="palindromeDowhile.html" target="_blank">dowhile</a>
+				</div>
+			</div>
+			</p>
+			<hr>
+			
+			
+			
+			
+			<p id=isPrime>
+			
+			
+			<h3>質數</h3>
+			<font size=4>
+			質數（Prime number），又稱素數，指在大於1的自然數中，除了1和該數自身外，無法被其他自然數整除的數（也可定義為只有1與該數本身兩個正因數的數）。大於1的自然數若不是質數，則稱之為合數（也稱為合成數）。
+			
+			
+			<br><br>
+			<b>舉例</b><br>
+			5是個質數，因為其正因數只有1與5。<br>
+			7是個質數，因為其正因數只有1與7。<br>
+			4是個合數，因為除了1與4外，2也是其正因數。<br>
+			6是個合數，因為除了1與6外，2與3也是其正因數。
+			<br><br>
+			
+			
+			
+			<div class="dropdown dropright">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background:#5A5AAD;color:white">
+				  判斷質數模擬
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="primeWhile.html" target="_blank">while</a>
+				  <a class="dropdown-item" href="primeFor.html" target="_blank">for</a>
+				  <a class="dropdown-item" href="primeDowhile.html" target="_blank">dowhile</a>
+				</div>
+			</div>
+			</p>
+			<hr>
+			
+			
+			
+			
+			
+			
+			<p id=decomposePrime>
+			
+			
+			<h3>質因數分解</h3>
+			<font size=4>
+			將一個正整數表示成質因數乘積的過程和得到的表示結果叫做質因數分解。<br><br>
+			<b>質因數</b><br>
+			質因數（或稱質因子）是指能整除給定正整數的質數。不考慮排列順序的情況下，每個正整數都能夠以唯一的方式表示成它的質因數的乘積。兩個沒有共同質因子的正整數稱為互質。因為1沒有質因子，1與任何正整數（包括1本身）都是互質。只有一個質因子的正整數為質數。
+			
+			<br><br>
+			<b>舉例</b><br>
+			100 = 2 * 2 * 5 * 5<br>
+			360 = 2 * 2 * 2 * 3 * 3 * 5
+			<br><br>
+			
+			
+			
+			<div class="dropdown dropright">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background:#5A5AAD;color:white">
+				  質因數分解模擬
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="primePartWhile.html" target="_blank">while</a>
+				  <a class="dropdown-item" href="primePartFor.html" target="_blank">for</a>
+				  <a class="dropdown-item" href="primePartDowhile.html" target="_blank">dowhile</a>
+				</div>
+			</div>
+			</p>
+			
+			<hr>
+			
+			
+			
+			<p id=test>
+			<!--<div class="dropdown">
+				<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background:#5A5AAD;color:white">
+				  解題評量
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="test.html" target="_blank">while</a>
+				  <a class="dropdown-item" href="primePartFor.html" target="_blank">for</a>
+				  <a class="dropdown-item" href="primePartDowhile.html" target="_blank">dowhile</a>
+				</div>
+			</div>-->
+			<h3>學習完，練習一下吧～</h3>
+			<br>
+			<button type="button" class="btn" style="background:#5A5AAD;color:white" onclick="window.open('test.html')">解題評量</button>
+			</p>
+			
+			<!--<label for="area">GCD</label>
+			<select class="form-control" id="selectarea" onchange="window.open(this.options[this.selectedIndex].value)">
+				<option value="01">while</option>
+				<option value="GCDfor.html">for</option>
+				<option value="03">dowhile</option>
+			</select>-->
+			
+			
+			<div class="go-top">
+			<!--<button type="button" class="btn" style="bolder:#5A5AAD;" onclick="window.location='#'"><img src="./image/top.png" height=50 width=50></button>-->
+			<a href="#"><img src="./image/top.png" height=50 width=50 class="rounded-circle"></a>
+			<!--<a href="#">返回</a>-->
+			</div>
+			
+			</article>
+		</div>
+	</div>
+</div>
+
+
+<hr>
+
+<!--<button type="button" class="btn" style="background:#5A5AAD;color:white" onclick="window.location='#'">回頂部</button>-->
+
+<p class="text-center"><a href="#">回頂部</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

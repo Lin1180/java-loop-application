@@ -1,0 +1,1069 @@
+<html>
+<script>
+
+
+
+var theme4 = [0, 0, 0, 0];
+var theme3 = [0, 0, 0];
+var questArr = ['num2 = ', 'isPal = ', 'isPrime = ', '輸出：'];
+
+var GCDhint = ['num2能整除num1則離開迴圈', '注意temp的值', 'num2為最大公因數'];
+var palihint = ['s.length()是取s的長度', 's.charAt(0)是s的第一個字', 'isPal負責記錄是否為迴文'];
+var primehint = ['i能整除num則跳出迴圈', 'Math.sqrt()是取平方根', '此題在判斷是否為質數'];
+var primeParthint = ['break是跳離目前的迴圈', 'num /= i; 為 num = num / i;', '此題在做質因數分解'];
+
+
+
+var GCDWcode = ['int num1 = ', 'int num2 = ', '<br>while(num1 % num2 != 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;int temp = num1 % num2;', '&nbsp;&nbsp;&nbsp;&nbsp;num1 = num2;', '&nbsp;&nbsp;&nbsp;&nbsp;num2 = temp;', '}', '<br>System.out.println(num2);'];
+var GCDFcode = ['int num1 = ', 'int num2 = ', '<br>for(int temp = 0; num1 % num2 != 0; num2 = temp) {', '&nbsp;&nbsp;&nbsp;&nbsp;temp = num1 % num2;', '&nbsp;&nbsp;&nbsp;&nbsp;num1 = num2;', '}', '<br>System.out.println(num2);'];
+var GCDDcode = ['int num1 = ', 'int num2 = ', 'int temp = num1;', '<br>do {', '&nbsp;&nbsp;&nbsp;&nbsp;num1 = num2;', '&nbsp;&nbsp;&nbsp;&nbsp;num2 = temp;', '&nbsp;&nbsp;&nbsp;&nbsp;temp = num1 % num2;', '} while(num1 % num2 != 0);', '<br>System.out.println(num2);'];
+
+
+var paliWcode = ['String s = ', 'boolean isPal = true;', 'int i = 0;', '<br>while(i < s.length() / 2) {', '&nbsp;&nbsp;&nbsp;&nbsp;if(s.charAt(i) != s.charAt(s.length() - 1 - i)){', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPal = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '}'];
+var paliFcode = ['String s = ', 'boolean isPal = true;', '<br>for(int i = 0; i < s.length() / 2; i++) {', '&nbsp;&nbsp;&nbsp;&nbsp;if(s.charAt(i) != s.charAt(s.length() - 1 - i)){', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPal = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '}'];
+var paliDcode = ['String s = ', 'boolean isPal = true;', 'int i = 0;', '<br>do {', '&nbsp;&nbsp;&nbsp;&nbsp;if(s.charAt(i) != s.charAt(s.length() - 1 - i)){', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPal = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '} while(i < s.length() / 2);'];
+
+
+var primeWcode = ['int num = ', 'boolean isPrime = true;', 'int i = 2;', '<br>while(i <= Math.sqrt(num)) {', '&nbsp;&nbsp;&nbsp;&nbsp;if(num % i == 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPrime = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '}'];
+var primeFcode = ['int num = ', 'boolean isPrime = true;', '<br>for(int i = 2; i <= Math.sqrt(num); i++) {', '&nbsp;&nbsp;&nbsp;&nbsp;if(num % i == 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPrime = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '}'];
+var primeDcode = ['int num = ', 'boolean isPrime = true;', 'int i = 2;', '<br>do {', '&nbsp;&nbsp;&nbsp;&nbsp;if(num % i == 0 && num != 2) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPrime = false;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '} while(i <= Math.sqrt(num));'];
+
+
+var primePartWcode = ['int num = ', 'int i = 2;', '<br>while(i <= num) {', '&nbsp;&nbsp;&nbsp;&nbsp;while(num != i) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num % i == 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(i + "*");', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num /= i;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '}', '<br>System.out.println(num);'];
+var primePartFcode = ['int num = ', '<br>for(int i = 2; i <= num; i++) {', '&nbsp;&nbsp;&nbsp;&nbsp;for( ;num != i; ) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num % i == 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(i + "*");', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num /= i;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;}', '}', '<br>System.out.println(num);'];
+var primePartDcode = ['int num = ', 'int i = 2;', '<br>do {', '&nbsp;&nbsp;&nbsp;&nbsp;do {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num % i == 0) {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print(i + "*");', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num /= i;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}', '&nbsp;&nbsp;&nbsp;&nbsp;} while(num != i);', '&nbsp;&nbsp;&nbsp;&nbsp;i++;', '} while(i < num);', '<br>System.out.println(num);'];
+
+
+
+var num = 0, num1 = 0, num2 = 0, temp = 0;
+var isPrime = true, isPal = true;
+var i;
+//var char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+var s = "";
+
+
+
+
+
+
+var quest = -1, subQuest;
+
+
+
+function randomStr()
+{
+	var sLangth = Math.floor(Math.random() * 10 + 1);
+	s = Math.random().toString(36).substr(2,sLangth);
+	//alert(s);
+	//s.substr(index,1)
+}
+function randomStrP()
+{
+	//var s1 = "";
+	var sLangth = Math.floor(Math.random() * 5 + 1);
+	var s1 = Math.random().toString(36).substr(2, sLangth);
+	s = s1;
+	//alert(s1);
+	if(Math.floor(Math.random() * 2) == 0)
+	{
+		for(var j = 0; j < s1.length; j++)
+		{
+			
+			//alert(s1.substr(s1.length - j - 1, 1));
+			s = s + s1.substr(s1.length - j - 1, 1);
+			
+		}
+	
+	}
+	else
+	{
+		for(var j = 1; j < s1.length; j++)
+		{
+			
+			//alert(s1.substr(s1.length - j - 1, 1));
+			s = s + s1.substr(s1.length - j - 1, 1);
+			
+		}
+	}
+	//alert(s);
+	//s.substr(index,1)
+}
+/*function randomN()
+{	
+	//alert("a");
+	var nStr = "";
+	var nchar = "0123456789";
+	for(var j = 0; j < 2; j++)
+	{
+		var langth = Math.floor(Math.random() * 10);
+		nStr = nStr + nchar.charAt(langth);
+		alert(nStr);
+		//alert(num1);
+	}
+	var n = parseInt(nStr);
+	//alert(n);
+	return n;
+	
+}*/
+
+
+var Q = -1;
+var point = 0;
+var Ans = ["", "", "", "", "", "", "", "", "", ""];
+//var addNumToQuest;
+var code;
+function randomQuest()
+{
+	document.getElementById("next").disabled = true;
+	document.getElementById("check").disabled = false;
+	quest = Math.floor(Math.random() * 12);
+	//quest++;
+	Q++;
+	document.getElementById("hint").innerHTML = "";
+	//subQuest = Math.floor(Math.random() * 3);
+	//alert(quest);
+	if(Q < 10)
+	{
+		switch(quest)
+		{
+		case 0:
+			code = GCDWcode;
+			//num1 = randomN();
+			//num2 = randomN();
+			num1 = Math.floor(Math.random() * 200 + 1);
+			num2 = Math.floor(Math.random() * 100 + 1);
+			showCode();
+			GCDW();
+			break;
+		case 1:
+			code = GCDFcode;
+			
+			num1 = Math.floor(Math.random() * 200 + 1);
+			num2 = Math.floor(Math.random() * 200 + 1);
+			showCode();
+			GCDF();
+			break;
+		case 2:
+			code = GCDDcode;
+			
+			num1 = Math.floor(Math.random() * 200 + 1);
+			num2 = Math.floor(Math.random() * 200 + 1);
+			showCode();
+			GCDD();
+			break;
+		case 3:
+			code = paliWcode;
+			if(Math.floor(Math.random() * 2) == 0)
+			{
+				randomStr();
+			}
+			else
+			{
+				randomStrP();
+			}
+			//randomStrP();
+			showCode();
+			paliW();
+			break;
+		case 4:
+			code = paliFcode;
+			if(Math.floor(Math.random() * 2) == 0)
+			{
+				randomStr();
+			}
+			else
+			{
+				randomStrP();
+			}
+			//randomStr();
+			showCode();
+			paliF();
+			break;
+		case 5:
+			code = paliDcode;
+			if(Math.floor(Math.random() * 2) == 0)
+			{
+				randomStr();
+			}
+			else
+			{
+				randomStrP();
+			}////////////////
+			//randomStrP();
+			//randomStr();
+			showCode();
+			paliD();
+			break;
+		case 6:
+			code = primeWcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primeW();
+			break;
+		case 7:
+			code = primeFcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primeF();
+			break;	
+		case 8:
+			code = primeDcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primeD();
+			break;	
+		case 9:
+			code = primePartWcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primePartW();
+			break;	
+		case 10:
+			code = primePartFcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primePartF();
+			break;	
+		case 11:
+			code = primePartDcode;
+			
+			num = Math.floor(Math.random() * 199 + 2);
+			showCode();
+			primePartD();
+			break;	
+		
+		}
+	
+	}
+	else
+	{
+		localStorage.setItem("point", point);
+		localStorage.setItem('theme4', JSON.stringify(theme4));
+		localStorage.setItem('theme3', JSON.stringify(theme3));
+		localStorage.setItem('wrong', JSON.stringify(wrong));
+		localStorage.setItem('errorQ', JSON.stringify(errorQ));
+		//localStorage.setItem("theme4", theme4);
+		//localStorage.setItem("theme3", theme3);
+		//localStorage.setItem("wrong", wrong);
+		document.getElementById("codeID").innerHTML = "";
+		document.getElementById("hideT").style.visibility="hidden";
+		
+		var d = "'diagnosis.html'";
+		document.getElementById("hideB").innerHTML = '<center><button type="button" class="btn btn-outline-secondary btn-lg" onclick="window.location=' + d + '"><b>前往學習診斷</b></button></center>';
+	}
+	
+	
+	//showCode();
+}
+
+
+var errorQ = ['', '', '', '', '', '', '', '', '', ''];
+
+function showCode()
+{	
+
+	if(quest < 3)
+	{	
+		//alert(num1);alert(num2);
+		code[0] = "int num1 = " + num1.toString() + ";";
+		code[1] = "int num2 = " + num2.toString() + ";";
+		codeString = document.getElementById("codeID");
+		codeString.innerHTML = "";
+		for(var j = 0; j < code.length; j++)
+		{
+			//if(addNumToQuest)
+			codeString.innerHTML = codeString.innerHTML + "<br>" + code[j];
+		
+		}
+		document.getElementById("questID").innerHTML = questArr[0] + "<input type=text id='inputAns' >";
+		errorQ[Q] = codeString.innerHTML;
+		//alert(codeString.innerHTML);
+		//questID
+	}
+	else if(quest < 6)
+	{
+		code[0] = "String s = " + s + ";";
+		codeString = document.getElementById("codeID");
+		codeString.innerHTML = "";
+		for(var j = 0; j < code.length; j++)
+		{
+			//if(addNumToQuest)
+			codeString.innerHTML = codeString.innerHTML + "<br>" + code[j];
+		
+		}
+		document.getElementById("questID").innerHTML = questArr[1] + "<input type=text id='inputAns' >";
+		errorQ[Q] = codeString.innerHTML;
+	}
+	else if(quest < 9)
+	{
+		code[0] = "int num = " + num + ";";
+		codeString = document.getElementById("codeID");
+		codeString.innerHTML = "";
+		for(var j = 0; j < code.length; j++)
+		{
+			//if(addNumToQuest)
+			codeString.innerHTML = codeString.innerHTML + "<br>" + code[j];
+		
+		}
+		document.getElementById("questID").innerHTML = questArr[2] + "<input type=text id='inputAns' >";
+		errorQ[Q] = codeString.innerHTML;
+	}
+	else
+	{
+		code[0] = "int num = " + num + ";";
+		codeString = document.getElementById("codeID");
+		codeString.innerHTML = "";
+		for(var j = 0; j < code.length; j++)
+		{
+			//if(addNumToQuest)
+			codeString.innerHTML = codeString.innerHTML + "<br>" + code[j];
+		
+		}
+		document.getElementById("questID").innerHTML = questArr[3] + "<input type=text id='inputAns' >";
+		errorQ[Q] = codeString.innerHTML;
+	}
+	
+	
+	
+	
+	/*codeString = document.getElementById("codeID");
+	codeString.innerHTML = "";
+	for(var j = 0; j < code.length; j++)
+	{
+		codeString.innerHTML = codeString.innerHTML + "<br>" + code[j];
+	
+	}*/
+	//document.getElementById("codeID").innerHTML = code;
+}
+
+
+function retry()
+{
+	
+	wrong = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	theme4 = [0, 0, 0, 0];
+	theme3 = [0, 0, 0];
+	primePartStr = "";
+	Q = -1;
+	point = 0;
+	barWidth = 0;
+}
+
+
+var wrong = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+function checkAns()
+{
+	usersAns = document.getElementById('inputAns').value;
+	document.getElementById("next").disabled = false;
+	
+	if(quest < 3)
+	{	
+		//usersAns = document.getElementById('inputAns').value;
+		usersAns = parseInt(usersAns);
+		if(usersAns == num2)
+		{
+			//document.getElementById("hint").innerHTML = "";
+			document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+			document.getElementById("check").disabled = true;
+			if(wrong[Q] > 5)
+			{
+				point += 4;
+				
+			}
+			else
+			{
+				point += 10 - wrong[Q];
+			
+			}
+		}
+		else
+		{
+		
+			theme4[0]++;
+			switch(quest)
+			{
+			case 0:
+				theme3[0]++;
+				break;
+			case 1:
+				theme3[1]++;
+				break;
+			case 2:
+				theme3[2]++;
+				break;
+			}
+			
+			
+			switch(wrong[Q])
+			{
+			case 0:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + GCDhint[0];
+				break;
+			case 1:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + GCDhint[1];
+				break;
+			case 2:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + GCDhint[2];
+				break;
+			}
+			wrong[Q]++;
+		
+		}
+		
+		
+	}
+	else if(quest < 6)
+	{
+	
+		if(isPal)
+		{
+		
+			if(usersAns == "true")
+			{
+				document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+				document.getElementById("check").disabled = true;
+				//document.getElementById("hint").innerHTML = "";
+				if(wrong[Q] > 5)
+				{
+					point += 4;
+				
+				}
+				else
+				{
+					point += 10 - wrong[Q];
+				}
+			}
+			else
+			{
+				theme4[1]++;
+				switch(quest)
+				{
+				case 3:
+					theme3[0]++;
+					break;
+				case 4:
+					theme3[1]++;
+					break;
+				case 5:
+					theme3[2]++;
+					break;
+				}
+				
+				
+				switch(wrong[Q])
+				{
+				case 0:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[0];
+					break;
+				case 1:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[1];
+					break;
+				case 2:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[2];
+					break;
+				}
+				wrong[Q]++;
+			
+			}
+		
+		}
+		else
+		{
+			if(usersAns == "false")
+			{
+				document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+				document.getElementById("check").disabled = true;
+				//document.getElementById("hint").innerHTML = "";
+				if(wrong[Q] > 5)
+				{
+					point += 4;
+				
+				}
+				else
+				{
+					point += 10 - wrong[Q];
+				
+				}
+			}
+			else
+			{
+				theme4[1]++;
+				switch(quest)
+				{
+				case 3:
+					theme3[0]++;
+					break;
+				case 4:
+					theme3[1]++;
+					break;
+				case 5:
+					theme3[2]++;
+					break;
+				}
+				
+				
+				switch(wrong[Q])
+				{
+				case 0:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[0];
+					break;
+				case 1:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[1];
+					break;
+				case 2:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + palihint[2];
+					break;
+				}
+				wrong[Q]++;
+			
+			}
+		}
+		
+	}
+	else if(quest < 9)
+	{
+		
+		if(isPrime)
+		{
+		
+			if(usersAns == "true")
+			{
+				document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+				document.getElementById("check").disabled = true;
+				//document.getElementById("hint").innerHTML = "";
+				if(wrong[Q] > 5)
+				{
+					point += 4;
+				}
+				else
+				{
+					point += 10 - wrong[Q];
+				
+				}
+			}
+			else
+			{
+				theme4[2]++;
+				switch(quest)
+				{
+				case 6:
+					theme3[0]++;
+					break;
+				case 7:
+					theme3[1]++;
+					break;
+				case 8:
+					theme3[2]++;
+					break;
+				}
+				
+				switch(wrong[Q])
+				{
+				case 0:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[0];
+					break;
+				case 1:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[1];
+					break;
+				case 2:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[2];
+					break;
+				}
+				wrong[Q]++;
+			}
+		
+		}
+		else
+		{
+			if(usersAns == "false")
+			{
+				document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+				document.getElementById("check").disabled = true;
+				//document.getElementById("hint").innerHTML = "";
+				if(wrong[Q] > 5)
+				{
+					point += 4;
+				}
+				else
+				{
+					point += 10 - wrong[Q];
+				
+				}
+			}
+			else
+			{
+				theme4[2]++;
+				switch(quest)
+				{
+				case 6:
+					theme3[0]++;
+					break;
+				case 7:
+					theme3[1]++;
+					break;
+				case 8:
+					theme3[2]++;
+					break;
+				}
+				
+				
+				switch(wrong[Q])
+				{
+				case 0:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[0];
+					break;
+				case 1:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[1];
+					break;
+				case 2:
+					document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primehint[2];
+					break;
+				}
+				
+				wrong[Q]++;
+			
+			}
+		}
+	}
+	else
+	{
+		if(usersAns == primePartStr)
+		{
+			document.getElementById("hint").innerHTML = "<br>" + "<font color=#01814A><b>答對了</b></font>";
+			document.getElementById("check").disabled = true;
+			//document.getElementById("hint").innerHTML = "";
+			if(wrong[Q] > 5)
+			{
+				point += 4;
+			
+			}
+			else
+			{
+			
+				point += 10 - wrong[Q];
+			
+			}
+		}
+		else
+		{
+			theme4[3]++;
+			switch(quest)
+			{
+			case 9:
+				theme3[0]++;
+				break;
+			case 10:
+				theme3[1]++;
+				break;
+			case 11:
+				theme3[2]++;
+				break;
+			}
+			
+			
+			
+			switch(wrong[Q])
+			{
+			case 0:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primeParthint[0];
+				break;
+			case 1:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primeParthint[1];
+				break;
+			case 2:
+				document.getElementById("hint").innerHTML = document.getElementById("hint").innerHTML + "<br>" + primeParthint[2];
+				break;
+			}
+			wrong[Q]++;
+		
+		}
+		
+	}
+	document.getElementById("userPoint").innerHTML = point;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function GCDW()
+{
+	while(num1 % num2 != 0) 
+	{
+		temp = num1 % num2;
+		num1 = num2;
+		num2 = temp;
+	}
+	//return num2;
+}
+function GCDF()
+{
+	for(temp = 0; num1 % num2 != 0; num2 = temp)
+	{
+		temp = num1 % num2;
+		num1 = num2;
+	}
+	//return num2;
+}
+function GCDD()
+{
+	temp = num1;
+	do
+	{
+		num1 = num2;
+		num2 = temp;
+		temp = num1 % num2;
+	}while(num1 % num2 != 0);
+	//return num2;
+}
+
+
+
+
+//var primeStr = "";
+function primeF()
+{
+	isPrime = true;
+	for(i = 2; i <= Math.sqrt(num); i++)
+	{
+		if(num % i == 0)
+		{
+			isPrime = false;
+			//System.out.println("not prime number");
+			break;
+		}
+	}
+}
+function primeW()
+{		
+	isPrime = true;
+	i = 2;
+	while(i <= Math.sqrt(num))
+	{
+		if(num % i == 0)
+		{
+			isPrime = false;
+			//System.out.println("not prime number");
+			break;
+		}
+		i++;
+	}
+}
+function primeD()
+{
+	isPrime = true;
+	i = 2;
+	do
+	{
+		if(num % i == 0 && num != 2)
+		{
+			isPrime = false;
+			//System.out.println("not prime number");
+			break;
+		}
+		i++;
+			
+	}while(i <= Math.sqrt(num));
+}
+
+
+
+
+
+function paliF()
+{
+	isPal = true;
+	for(i = 0; i < Math.floor(s.length / 2); i++)
+	{
+		if(s.charAt(i) != s.charAt(s.length - 1 - i))
+		{
+			isPal = false;
+			break;
+		}
+	}
+}
+function paliW()
+{
+	isPal = true;
+	i = 0;
+	while(i < Math.floor(s.length / 2))
+	{
+		if(s.charAt(i) != s.charAt(s.length - 1 - i))
+		{
+			isPal = false;
+			break;
+		}
+		i++;
+	}
+	
+}
+function paliD()
+{
+	isPal = true;
+	i = 0;
+	do
+	{
+		if(s.charAt(i) != s.charAt(s.length - 1 - i))
+		{
+			
+			isPal = false;
+			break;
+		}
+		i++;
+		
+	}while(i < Math.floor(s.length / 2));
+	
+}
+
+
+var primePartStr = "";
+
+function primePartD()
+{
+	primePartStr = "";
+	i = 2;
+	do
+	{
+		do
+		{	
+			if (num % i == 0)
+			{	
+				primePartStr = primePartStr + i + "*";
+                //System.out.print(i + "*");
+                num = num / i;
+            }
+			else
+			{
+                break;
+            }
+
+		}while(num != i);
+		i++;
+			
+	}while(i < num);
+	//System.out.println(num);
+	primePartStr = primePartStr + num;
+}
+function primePartW()
+{
+	primePartStr = "";
+	i = 2;
+	while(i <= num)
+	{
+        while(num != i)
+		{
+            if (num % i == 0)
+			{
+                //System.out.print(i + "*");
+				primePartStr = primePartStr + i + "*";
+                num = num / i;
+            }
+			else
+			{
+                break;
+            }
+        }
+		i++;
+    }
+	//System.out.println(num);
+	primePartStr = primePartStr + num;
+}
+function primePartF()
+{
+	primePartStr = "";
+	for(i = 2; i <= num; i++)
+	{
+        for( ;num != i; )
+		{
+            if (num % i == 0)
+			{
+                
+				primePartStr = primePartStr + i + "*";
+                num /= i;
+            }
+			else
+			{
+                break;
+            }
+        }
+		
+    }
+	
+	primePartStr = primePartStr + num;
+}
+
+
+
+
+
+var barWidth = 0;
+
+function move()
+{
+	var elem = document.getElementById("bar");
+	if (barWidth < 100)
+	{
+		barWidth += 10;
+		elem.style.width = barWidth + "%";
+		elem.innerHTML = barWidth * 1 + "%";
+    }
+  
+}
+
+
+function startTest()
+{
+	move();
+	randomQuest();
+	//document.getElementById("next").style.display = "block";
+	document.getElementById("start").style.display = "none";
+	document.getElementById("hideB").style.visibility="visible";
+	document.getElementById("hideT").style.visibility="visible";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>	
+	<script src="js/popper.min.js"></script>
+  
+	
+	
+	
+	<title>test</title> 
+</head>
+
+
+
+
+
+
+
+
+<body onload='randomStr()'>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#6a337f" >
+	<a class="navbar-brand" href="main.html" style="color:white">迴圈應用</a>
+	
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		  
+		  <li class="nav-item">
+			<a class="nav-link" href="main.html" style="color:white">首頁</a>
+		  </li>		  
+		  
+		  <li class="nav-item active">
+			<a class="nav-link" href="#">解題評量</a>
+		  </li>	
+		</ul>
+	</div>
+</nav>
+
+
+<header>
+    <div class="container mt-3">	  	
+		<h1>解題評量</h1>
+        <!--<h5 class="text-muted">迴圈：while</h5>-->
+		
+		<font size=5>
+		<p>目前分數：<span id=userPoint></span></p>
+		</font>
+		
+    </div>
+	
+	
+</header>  
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="progress" style="width:100%;">
+				<div class="progress-bar" style="width:0%;background-color:#5055af;" id=bar>0%</div>
+			</div>
+			<br>
+		<article>
+			<div id='hideT' style="visibility:hidden;">
+			<table class="table table-condensed" >
+				<thead class="thead-light">
+					<tr class="">
+						<th>程式碼</th>
+						<th>題目</th> 
+								
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id=codeID><!--while(num1 % num2 != 0)<br>
+									{<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;var temp = num1 % num2;<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;num1 = num2;<br>
+									&nbsp;&nbsp;&nbsp;&nbsp;num2 = temp;<br>
+									}<br>
+									return num2;--></td>
+						<td><p id=questID></p><p id=hint></p></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			</div>
+		<center><button type="button" class="btn btn-outline-secondary btn-lg" id='start' onclick="startTest();"><b>開始測驗</b></button></center>
+		<div id='hideB' style="visibility:hidden;">
+		<button type="button" class="btn btn-outline-secondary" id='next' onclick="randomQuest();move();"><b>下一題</b></button>
+		<button type="button" class="btn btn-outline-secondary" id='check' onclick="checkAns();"><b>檢驗答案</b></button>
+		</div>
+		
+		
+		
+		
+		</article>
+		</div>
+		
+		<div class="col-md-1">
+		<aside>
+			
+			
+		</aside>
+		</div>
+	</div>
+</div>
+
+
+
+<hr>
+
+</body>
+</html>
